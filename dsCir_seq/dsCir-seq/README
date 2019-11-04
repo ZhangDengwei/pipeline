@@ -1,0 +1,54 @@
+'''
+Developer: Dengwei Zhang
+E-mail: zhangdengwei@genomics.cn
+'''
+
+'''
+dsCir_seq.py pipeline is stemmed from circleseq.py based on a published paper - 
+CIRCLE-seq: A highly sensitive in vitro screen for genome-wide CRISPR-Cas9 
+nuclease off-targets, whose github address is "https://github.com/tsailabSJ/circleseq".
+
+However, original circleseq pipeline would merge pair-end reads into one, then 
+being aligned to reference. This dsCir-Seq extracts aligned result from the 
+mapping result of pair-end reads, and judges the direction of library DNA whether
+ it is circular or linear according to its mapping location.
+
+Some steps in circleseq pipeline have been simplified and modified.
+
+There is no need to delete all generated files and folders when you encountered some 
+errors in your program. Deleting the files in the problematic step and run this pipeline 
+again to re-analyze your data.
+'''
+
+'''
+Procedure of dsCir_seq:
+01. reads QC using fastp
+02. align pair-end reads to reference using BWA
+03. extract mapping information and generate report
+04. summarize sequencing depth and uniformity
+05. report
+'''
+
+'''
+User must offer the two following file with requested format:
+#1: sample.txt (seven columns separated by tab-delimited)
+column 1: sample name
+column 2: absolute path of read 1
+column 3: absolute path of read 2
+column 4: target site
+column 5: chromosome
+column 6: start
+column 7: end
+
+#2: adapter.fa (contains all adapter sequences with Fasta format)
+>adapter_1
+ATGCG...
+>adapter_2
+ACGTT...
+>adapter_3
+AGGTT...
+'''
+
+
+A sample command:
+nohup python3 /hwfssz5/CNGB_WRITE/USER/zhangdengwei/pipeline/dsCir_seq/dsCir_seq.py --sample_file sample_file --output_path ./ --python_command python3 --adapter_file AD156.fa --bwa_index /zfssz3/ST_SUPERCELLS/USER/zhangdengwei/Genome/Human/GENCODE/6.bwa_index/GRCh38.bwa --reference /zfssz3/ST_SUPERCELLS/USER/zhangdengwei/Genome/Human/GENCODE/1.genome/GRCh38.primary_assembly.genome.fa --GTF_file /zfssz3/ST_SUPERCELLS/USER/zhangdengwei/Genome/Human/GENCODE/1.genome/gencode.v29.primary_assembly.annotation.gtf &

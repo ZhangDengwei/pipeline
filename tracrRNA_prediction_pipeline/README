@@ -1,0 +1,18 @@
+=======================================================
+[USEAGE]
+python3 tracrRNA_analysis_SE.py pathfile [single-end]
+python3 tracrRNA_analysis_PE.py pathfile [paired-end]
+======================================================
+pathfile
+[single-end]
+sample_1_name:read
+sample_2_name:read
+sample_3_name:read
+......
+[paired-end]
+sample_1_name:read1:read2
+sample_2_name:read1:read2
+sample_3_name:read1:read2
+......
+======================================================
+Attention: read file must be absolute path! eg./home/scx/crispr/CL0239109301_L01_54.fq.gz
